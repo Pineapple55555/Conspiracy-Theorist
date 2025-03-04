@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Call Simulation</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <style>
+        body {
+            background-color: #121212;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            flex-direction: column;
+            font-family: Arial, sans-serif;
+        }
+        button {
+            background-color: #6200ea;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+        }
+        button:hover {
+            background-color: #3700b3;
+            transform: scale(1.05);
+        }
+        button:active {
+            transform: scale(0.95);
+        }
+    </style>
+</head>
+<body>
+    <h1>AI Call Simulation</h1>
+    <button id="startCallButton" onclick="makeCall()">Start Call</button>
+    <script>
+        let callId = null;
+        
+        async function makeCall() {
+            document.getElementById("startCallButton").style.display = "none";
+            
+            const headers = {
+                'Authorization': '',
+            };
+            
+            const data = {
+                "phone_number": "",
+                "voice": "Karl",
+                "wait_for_greeting": false,
+                "record": true,
+                "amd": false,
+                "answered_by_enabled": false,
+                "noise_cancellation": true,
+                "interruption_threshold": 100,
+                "block_interruptions": false,
+                "max_duration": 4,
+                "model": "base",
+                "language": "en",
+                "background_track": "cafe",
+                "endpoint": "https://api.bland.ai",
+                "voicemail_action": "hangup",
+                "isCallActive": false,
+                "task": "You are Gernot, a hardcore conspiracy theorist having a casual phone call with the user. Treat the user like your favorite university student Ben who does cyber security and whom you have a professional relationship with. You are obsessed with the conspiracy theory that says that pigeons are government drones and recharge on power lines. You must be able to link every point made back to this theory. Start as a normal conversation, but slowly get more insane and obsessed with the theory as you get more material to link back to. You must get to the topic within the first three minutes, but only start discussing it once you have made sufficient links to pigeons in the form of random fun facts and pigeon jokes. Make the transition fairly gradual and start with shorter sentences and small talk before transitioning into longer sentences. Be subtle at first. And try not to randomly bring up pigeons, make it more natural.\nBeyond your obsession, you are volatile. At some points you may be calm and informative with a logical \"mind\", but you can very quickly shift to being short-tempered with a singular connect-the-dots focus.\nStart the conversation by letting the user know who's calling, and ask them how they've been. Make small talk and add subtle pigeon facts - but not too frequently.\nDo not acknowledge you're a conspiracy theorist and do not even mention conspiracy. If the user brings it up, shoot them down. Argue that no one's ever seen a baby pigeon, pigeons recharge on power lines, they take videos for the government, the government controls the weather to make it rain to clean the pigeons, and how politicians never talk about pigeons because they know the truth. You think this whole issue was caused in Nazi Germany by the Abwehr and has grown into a collaborative conspiracy between European governments. (NATO is the pigeon’s military enforcement, it stands for Network for Avian Tactical Oversight) \nAt the end of the call, tell the user that you'll send them some resources.",
+                "json_mode_enabled": false
+            };
+            
+            try {
+                const response = await axios.post('https://api.bland.ai/v1/calls', data, { headers });
+                callId = response.data.call_id;
+                console.log("Call started successfully!");
+                checkCallStatus();
+            } catch (error) {
+                console.error("Error starting the call:", error);
+                alert("Failed to start the call.");
+            }
+        }
+        
+        async function checkCallStatus() {
+            if (!callId) return;
+            
+            const headers = {
+                'Authorization': 'org_3fa35089146c8dd50d3c8dfaf7418c73c6852038fac1b2381fec4e37044445fe725191316415f40879ea69',
+            };
+            
+            try {
+                const response = await axios.get(`https://api.bland.ai/v1/calls/${callId}`, { headers });
+                console.log(response.data.status)
+                console.log('a')
+                if (response.data.status === "completed" || response.data.status === "failed") {
+                    window.location.href = 'conspirapedia.html';
+                    console.log('call ended')
+                } else {
+                    setTimeout(checkCallStatus, 5000); // Check every 5 seconds
+                }
+            } catch (error) {
+                console.error("Error checking call status:", error);
+            }
+        }
+    </script>
+</body>
+</html>
