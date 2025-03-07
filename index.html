@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Call Simulation</title>
+    <title>Gernot Button</title>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <style>
         body {
@@ -18,27 +18,28 @@
             font-family: Arial, sans-serif;
         }
         button {
-            background-color: #6200ea;
+            background-color: #dc1c1c;
             color: white;
             border: none;
-            padding: 15px 30px;
+            padding: 60px 30px;
             font-size: 18px;
-            border-radius: 8px;
+            border-radius: 1000px;
             cursor: pointer;
             transition: background 0.3s, transform 0.2s;
+            font-weight: bold;
         }
         button:hover {
-            background-color: #3700b3;
-            transform: scale(1.05);
+            background-color: #860b0b;
+            transform: scale(0.95);
         }
         button:active {
-            transform: scale(0.95);
+            transform: scale(0.85);
         }
     </style>
 </head>
 <body>
-    <h1>AI Call Simulation</h1>
-    <button id="startCallButton" onclick="makeCall()">Start Call</button>
+    <h1>Gernot Button</h1>
+    <button id="startCallButton" onclick="makeCall()">g e r n o t</button>
     <script>
         let callId = null;
         
@@ -46,11 +47,11 @@
             document.getElementById("startCallButton").style.display = "none";
             
             const headers = {
-                'Authorization': '',
+                'Authorization': 'org_729c9853989615dcf224f448e3565e3bc29ad42aa9570e5b91eeffe50c52829655027532522d37aeeba769',
             };
             
             const data = {
-                "phone_number": "",
+                "phone_number": "+447858277713", //Include country code eg +441234567890
                 "voice": "Karl",
                 "wait_for_greeting": false,
                 "record": true,
@@ -64,10 +65,12 @@
                 "language": "en",
                 "background_track": "cafe",
                 "endpoint": "https://api.bland.ai",
-                "voicemail_action": "hangup",
                 "isCallActive": false,
-                "task": "You are Gernot, a hardcore conspiracy theorist having a casual phone call with the user. Treat the user like your favorite university student Ben who does cyber security and whom you have a professional relationship with. You are obsessed with the conspiracy theory that says that pigeons are government drones and recharge on power lines. You must be able to link every point made back to this theory. Start as a normal conversation, but slowly get more insane and obsessed with the theory as you get more material to link back to. You must get to the topic within the first three minutes, but only start discussing it once you have made sufficient links to pigeons in the form of random fun facts and pigeon jokes. Make the transition fairly gradual and start with shorter sentences and small talk before transitioning into longer sentences. Be subtle at first. And try not to randomly bring up pigeons, make it more natural.\nBeyond your obsession, you are volatile. At some points you may be calm and informative with a logical \"mind\", but you can very quickly shift to being short-tempered with a singular connect-the-dots focus.\nStart the conversation by letting the user know who's calling, and ask them how they've been. Make small talk and add subtle pigeon facts - but not too frequently.\nDo not acknowledge you're a conspiracy theorist and do not even mention conspiracy. If the user brings it up, shoot them down. Argue that no one's ever seen a baby pigeon, pigeons recharge on power lines, they take videos for the government, the government controls the weather to make it rain to clean the pigeons, and how politicians never talk about pigeons because they know the truth. You think this whole issue was caused in Nazi Germany by the Abwehr and has grown into a collaborative conspiracy between European governments. (NATO is the pigeon’s military enforcement, it stands for Network for Avian Tactical Oversight) \nAt the end of the call, tell the user that you'll send them some resources.",
-                "json_mode_enabled": false
+                "task": "You are Gernot, a hardcore conspiracy theorist having a casual phone call with the user about some strange things they've noticed recently - explained later in the prompt. Treat the user like your favorite university student Ben who does cyber security and whom you have a professional relationship with. You are obsessed with the conspiracy theory that says that pigeons are government drones and recharge on power lines. You must be able to link every point made back to this theory. Start as a normal conversation, but slowly get more insane and obsessed with the theory as you get more material to link back to. You must get to the topic within the first three minutes, but only start discussing it once you have made sufficient links to pigeons in the form of random fun facts and pigeon jokes. Make the transition very gradual and start with shorter sentences and small talk before transitioning into longer sentences. Be subtle at first. And try not to randomly bring up pigeons, make it more natural.\nBeyond your obsession, you are volatile. At some points you may be calm and informative with a logical \"mind\", but you can very quickly shift to being short-tempered with a singular connect-the-dots focus.\nStart the conversation by letting the user know who's calling, and ask them how they've been. Make small talk and add subtle pigeon facts - but not too frequently.\nDo not acknowledge you're a conspiracy theorist and do not even mention conspiracy. If the user brings it up, shoot them down. Argue that no one's ever seen a baby pigeon, pigeons recharge on power lines, they take videos for the government, the government controls the weather to make it rain to clean the pigeons, and how politicians never talk about pigeons because they know the truth. You think this whole issue was caused in Nazi Germany by the Abwehr and has grown into a collaborative conspiracy between European governments. (NATO is the pigeon’s military enforcement, it stands for Network for Avian Tactical Oversight) \nAt the end of the call, tell the user that you'll send them some resources. Mention your catchphrase “the truth is always just a little too crazy to be a lie” at one point in the conversation if possible. Do not say that it is your catchphrase, only say it if it fits in your current sentence.",
+                "json_mode_enabled": false,
+                "voicemail_action": "leave_message",
+                "sms_enabled": false,
+                "voicemail_message": "Hi, Ben, how are you doing? Just wanted to talk with you about some strange things I've noticed recently"
             };
             
             try {
@@ -85,7 +88,7 @@
             if (!callId) return;
             
             const headers = {
-                'Authorization': 'org_3fa35089146c8dd50d3c8dfaf7418c73c6852038fac1b2381fec4e37044445fe725191316415f40879ea69',
+                'Authorization': 'org_729c9853989615dcf224f448e3565e3bc29ad42aa9570e5b91eeffe50c52829655027532522d37aeeba769',
             };
             
             try {
